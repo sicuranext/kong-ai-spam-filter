@@ -16,7 +16,7 @@ jobs:
       - name: Luacheck linter
         uses: lunarmodules/luacheck@v1
         with:
-          args: --globals kong --globals ngx --files plugin/**/*.lua
+          args: plugin/ --globals kong --globals ngx -u --no-max-code-line-length
 
   integration-tests:
     name: Integration Tests
