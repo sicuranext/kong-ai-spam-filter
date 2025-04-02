@@ -111,8 +111,8 @@ _M.gemini = function(plugin_conf, user_prompt)
 
   kong.log.err("LLM response: ", res.body)
 
-  local success, response_data = pcall(cjson.decode, res.body)
-  if not success then
+  local success_decode, response_data = pcall(cjson.decode, res.body)
+  if not success_decode then
     return nil, "Failed to decode JSON response: " .. (response_data or "unknown error")
   end
 
@@ -240,8 +240,8 @@ _M.gpt = function(plugin_conf, user_prompt)
   end
 
   -- Try to decode the response as JSON using pcall for error handling
-  local success, result = pcall(cjson.decode, response_text)
-  if not success then
+  local success_decode, result = pcall(cjson.decode, response_text)
+  if not success_decode then
     return nil, "Failed to parse LLM response as JSON: " .. (result or "unknown error")
   end
 
@@ -336,8 +336,8 @@ _M.claude = function(plugin_conf, user_prompt)
   end
 
   -- Try to decode the response as JSON using pcall for error handling
-  local success, result = pcall(cjson.decode, response_text)
-  if not success then
+  local success_decode, result = pcall(cjson.decode, response_text)
+  if not success_decode then
     return nil, "Failed to parse LLM response as JSON: " .. (result or "unknown error")
   end
 
