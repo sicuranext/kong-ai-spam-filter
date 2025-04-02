@@ -1,0 +1,28 @@
+# VS Code specific files
+.vscode/
+*.code-workspace
+.history/
+
+# Lua compiled files
+*.o
+*.so
+*.a
+*.lua.c
+luac.out
+
+# Environment files (can contain API keys)
+.env
+*.env
+.env.*
+*/.env
+*/.env.*
+
+# API keys
+*_key.lua
+*_secret.lua
+*_token.lua
+api_keys.lua
+secrets.lua
+
+# Claude code
+CLAUDE.md
