@@ -16,6 +16,7 @@ luac.out
 .env.*
 */.env
 */.env.*
+!.env.example
 
 # API keys
 *_key.lua
