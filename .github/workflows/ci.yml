@@ -50,6 +50,9 @@ jobs:
                --variable OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
                --variable ANTHROPIC_API_KEY=${{ secrets.ANTHROPIC_API_KEY }} \
                tests/000_setup.hurl
+          echo "Waiting for Kong Service to be ready..."
+          timeout 60 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' -H ''Host: regression-test'' localhost:8000)" != "200" ]]; do sleep 2; done' || exit 1
+          echo "Kong Service is ready!"
 
       - name: Run spam tests
         run: |
