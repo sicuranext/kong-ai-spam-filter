@@ -83,3 +83,13 @@ While this plugin provides powerful spam detection capabilities, it should not b
    - Consider implementing a quota system at the application level
 
 Without these additional protections, automated threats could rapidly exhaust your API quotas or generate unexpected costs through repeated requests.
+
+# TODO
+
+## add how-to test it via docker
+
+## add here our tests about prompt injection/hijacking
+
+## add here instructions to report security issue or bypasses
+and related list of users who contributed
+
