@@ -55,5 +55,7 @@ jobs:
           hurl tests/003_spam_simple.hurl
           
       - name: Stop Docker Compose
-        run: docker compose down
+        run: |
+          cd docker/
+          docker compose down
         if: always()
