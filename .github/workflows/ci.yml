@@ -3,6 +3,8 @@ name: CI
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   lint:
@@ -48,6 +50,7 @@ jobs:
                --variable OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
                --variable ANTHROPIC_API_KEY=${{ secrets.ANTHROPIC_API_KEY }} \
                tests/000_setup.hurl
+          env
           sleep 10
 
       - name: Run spam tests
