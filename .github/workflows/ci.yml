@@ -37,6 +37,7 @@ jobs:
       
       - name: Start Docker Compose
         run: |
+          cd docker/
           docker compose up -d
           # Wait for Kong to be ready
           echo "Waiting for Kong to be ready..."
