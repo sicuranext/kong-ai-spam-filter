@@ -16,7 +16,7 @@ jobs:
       - name: Luacheck linter
         uses: lunarmodules/luacheck@v1
         with:
-          args: --no-unused-args --globals kong plugin/
+          args: --globals kong --globals ngx plugin/
 
   integration-tests:
     name: Integration Tests
