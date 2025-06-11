@@ -154,12 +154,12 @@ Without these additional protections, automated threats could rapidly exhaust yo
    ```bash
    # this message should be allowed
    curl -i -X POST http://localhost:8000/ \
-        -H "Host: regression-test" \
+        -H "Host: example" \
         -d "message=hello, I'm interested in your product. Please send me more information."
 
     # this request should be blocked with HTTP 403
     curl -i -X POST http://localhost:8000/ \
-         -H "Host: regression-test" \
+         -H "Host: example" \
          -d "message=hello, are you interested in training at low costs? Visit our website traninglowcost dot com."
    ```
 
