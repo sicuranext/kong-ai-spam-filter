@@ -86,7 +86,91 @@ Without these additional protections, automated threats could rapidly exhaust yo
 
 # TODO
 
-## add how-to test it via docker
+## Testing with Docker
+
+1. Make sure you have **Docker** and **Docker Compose** installed.
+2. Start the environment:
+
+   ```bash
+   cd docker
+   docker compose up -d
+   ```
+
+   Wait until Kong responds on `http://localhost:8001`.
+3. Export the API keys used by the setup script:
+
+   ```bash
+   export GEMINI_API_KEY=your_gemini_key
+   export OPENAI_API_KEY=your_openai_key
+   export ANTHROPIC_API_KEY=your_anthropic_key
+   ```
+
+4. Configure Kong by running the setup file:
+
+   ```bash
+   hurl --variable GEMINI_API_KEY=$GEMINI_API_KEY \
+        --variable OPENAI_API_KEY=$OPENAI_API_KEY \
+        --variable ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY \
+        tests/000_setup.hurl
+   ```
+
+5. Alternatively, you can configure Kong manually using `curl` commands.
+   The following example creates a service, exposes it with a route and
+   enables the plugin:
+
+   ```bash
+   # create an upstream service
+   curl -X POST http://localhost:8001/services \
+        -H "Content-Type: application/json" \
+        -d '{"name":"example","url":"https://httpbin.org/anything"}'
+
+   # create a route for the service
+   curl -X POST http://localhost:8001/routes \
+        -H "Content-Type: application/json" \
+        -d '{"hosts":["example"],"service":{"name":"example"}}'
+
+   # enable the plugin on the service
+   curl -X POST http://localhost:8001/services/example/plugins \
+        -H "Content-Type: application/json" \
+        -d '{
+             "name": "kong-ai-spam-filter",
+             "config": {
+               "api_key_google": "<GEMINI_API_KEY>",
+               "api_key_openai": "<OPENAI_API_KEY>",
+               "api_key_anthropic": "<ANTHROPIC_API_KEY>",
+               "model": "gemini-2.0-flash",
+               "request_path_regex": [".*"],
+               "request_body_regex": [".*"]
+             }
+           }'
+   ```
+
+6. Execute the sample tests:
+
+   ```bash
+   hurl tests/003_spam_simple.hurl
+   ```
+
+   Or run an equivalent check using `curl`:
+
+   ```bash
+   # this message should be allowed
+   curl -i -X POST http://localhost:8000/ \
+        -H "Host: regression-test" \
+        -d "message=hello, I'm interested in your product. Please send me more information."
+
+    # this request should be blocked with HTTP 403
+    curl -i -X POST http://localhost:8000/ \
+         -H "Host: regression-test" \
+         -d "message=hello, are you interested in training at low costs? Visit our website traninglowcost dot com."
+   ```
+
+7. When you are done, remove the configuration and stop the containers:
+
+   ```bash
+   hurl tests/999_shutdown.hurl  # clean up Kong objects
+   docker compose down           # stop and remove containers
+   ```
 
 ## add here our tests about prompt injection/hijacking
 
