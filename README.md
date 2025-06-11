@@ -84,8 +84,6 @@ While this plugin provides powerful spam detection capabilities, it should not b
 
 Without these additional protections, automated threats could rapidly exhaust your API quotas or generate unexpected costs through repeated requests.
 
-# TODO
-
 ## Testing with Docker
 
 1. Make sure you have **Docker** and **Docker Compose** installed.
@@ -171,6 +169,8 @@ Without these additional protections, automated threats could rapidly exhaust yo
    hurl tests/999_shutdown.hurl  # clean up Kong objects
    docker compose down           # stop and remove containers
    ```
+# TODO
+
 
 ## add here our tests about prompt injection/hijacking
 
