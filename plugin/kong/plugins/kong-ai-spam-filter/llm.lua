@@ -363,11 +363,6 @@ end
 ---@return table|nil result Result from the LLM or nil on error
 ---@return string|nil error Error message if request failed
 _M.ollama = function(plugin_conf, user_prompt)
-  --[[
-  curl -H 'Content-Type: application/json' -d '{"model":"gemma3:latest","prompt":"ciao","stream":false}' http://localhost:11434/api/generate
-  {"model":"gemma3:latest","created_at":"2025-04-15T10:15:08.13855Z","response":"Ciao! Come posso aiutarti oggi? 😊 \n\nDimmi pure cosa ti serve o cosa ti interessa.\n","done":true,"done_reason":"stop","context":[105,2364,107,5379,236748,106,107,105,4368,107,150917,236888,20639,83041,110212,31548,41666,236881,103453,236743,108,18993,1327,8176,26617,3163,7298,512,26617,3163,183325,236761,107],"total_duration":902315625,"load_duration":53986792,"prompt_eval_count":11,"prompt_eval_duration":151009292,"eval_count":24,"eval_duration":696916500}%
-  ]]
-
   if not plugin_conf.model then
     return nil, "Missing model for OLLAMA"
   end
