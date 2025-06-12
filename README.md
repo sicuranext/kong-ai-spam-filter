@@ -53,6 +53,14 @@ For spam messages:
 - Configure response actions (block or log)
 - Fine-tune the AI's behavior with temperature and token settings
 
+### Configuring `request_path_regex` and `request_body_regex`
+These parameters define which requests are inspected by the plugin. `request_path_regex` is an array of regular expressions matched against the request path, while `request_body_regex` is matched against the raw request body. The plugin only calls the LLM when at least one pattern from **both** arrays matches, preventing unnecessary requests and reducing cost and latency. For example, you can scan only contact form submissions that include a `message` field:
+
+```json
+"request_path_regex": ["^/contacts$"],
+"request_body_regex": ["message=.+"]
+```
+
 ### Reduced False Positives
 The plugin is designed to recognize legitimate contact requests, support inquiries, and business communications while filtering out unwanted content.
 
