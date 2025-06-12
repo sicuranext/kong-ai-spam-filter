@@ -198,11 +198,6 @@ Without these additional protections, automated threats could rapidly exhaust yo
    hurl tests/999_shutdown.hurl  # clean up Kong objects
    docker compose down           # stop and remove containers
    ```
-# TODO
 
-
-## add here our tests about prompt injection/hijacking
-
-## add here instructions to report security issue or bypasses
-and related list of users who contributed
-
+## Prompt Hijacking and Spam Filter Bypass Testing
+We maintain a suite of tests that simulate prompt injection and spam filter bypass techniques. These scenarios are based on the experiments described in our blog post [Influencing LLM output using logprobs and token distribution](https://blog.sicuranext.com/infuencing-llm-output-using-logprobs-and-token-distribution/). The test cases attempt to override prompts, change model behaviour mid-conversation, manipulate token probabilities and hide spam in seemingly valid messages. They are located in the [tests/prompt_injection](tests/prompt_injection) directory.
