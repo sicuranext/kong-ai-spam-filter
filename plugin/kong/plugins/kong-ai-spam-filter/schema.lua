@@ -107,8 +107,12 @@ local schema = {
           { model = { type = "string", default = "gpt-4o-mini", one_of = {
                                                                   "gpt-4o",
                                                                   "gpt-4o-mini",
+                                                                  "gpt-4o-2024-05-13",
+                                                                  "gpt-4o-mini-2024-07-18",
                                                                   "gemini-2.0-flash",
-                                                                  "claude-3-7-sonnet-latest"
+                                                                  "gemini-2.5-flash-preview-04-17",
+                                                                  "claude-3-7-sonnet-latest",
+                                                                  "ollama"
                                                                 },
             description = model_description } },
           { temperature = { type = "number", default = 0.2, description = temperature_description } },
@@ -116,6 +120,8 @@ local schema = {
           { api_key_openai = { type = "string", description = api_key_openai_description } },
           { api_key_google = { type = "string", description = api_key_google_description } },
           { api_key_anthropic = { type = "string", description = api_key_anthropic_description } },
+          { ollama_url = { type = "string", description = "Example http://localhost:11434/api/generate" } },
+          { ollama_model = { type = "string", description = "Example gemma3:latest" } },
           { action = { type = "string", default = "block-if-spam-only", one_of = {
                                                                           "block-if-spam-or-error",
                                                                           "block-if-spam-only",
