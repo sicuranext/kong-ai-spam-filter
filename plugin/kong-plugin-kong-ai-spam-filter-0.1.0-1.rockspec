@@ -5,7 +5,7 @@ local pluginName = package:match("^kong%-plugin%-(.+)$")
 
 supported_platforms = {"linux"}
 source = {
-  url = "https://github.com/",
+  url = "https://github.com/sicuranext/kong-ai-spam-filter",
   tag = "main"
 }
 
