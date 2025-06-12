@@ -363,9 +363,6 @@ end
 ---@return table|nil result Result from the LLM or nil on error
 ---@return string|nil error Error message if request failed
 _M.ollama = function(plugin_conf, user_prompt)
-  --[[
-  ]]
-
   if not plugin_conf.model then
     return nil, "Missing model for OLLAMA"
   end
