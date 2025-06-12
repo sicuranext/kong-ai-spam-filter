@@ -7,11 +7,18 @@ local llm = require "kong.plugins.kong-ai-spam-filter.llm"
 local cjson = require "cjson.safe"
 
 local response_body_replace = function(plugin_conf, result)
+  local model = plugin_conf.model
+
+  -- if model is ollama, use the model name
+  if model == "ollama" then
+    model = plugin_conf.ollama_model
+  end
+
   local response_body_table = {
     message = "Request blocked due to spam detection",
     category = result.category,
     reason = result.reason,
-    model = plugin_conf.model
+    model = model
   }
 
   local response_body = cjson.encode(response_body_table)
@@ -22,7 +29,7 @@ local response_body_replace = function(plugin_conf, result)
     -- replace %{result.reason} string
     response_body = response_body:gsub("%%{result%.reason}", result.reason or "no reason provided")
     -- replace %{plugin_conf.model} string
-    response_body = response_body:gsub("%%{plugin_conf%.model}", plugin_conf.model)
+    response_body = response_body:gsub("%%{plugin_conf%.model}", model)
 
   end
 
