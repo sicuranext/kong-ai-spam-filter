@@ -9,7 +9,7 @@ This plugin intercepts incoming requests to your API or website forms and analyz
 - OpenAI (GPT-4o, GPT-4o-mini)
 - Google (Gemini 2.0 Flash)
 - Anthropic (Claude 3.7 Sonnet)
-- *coming soon* Local models with ollama
+- Local models with ollama
 
 When spam is detected, the plugin can either block the request entirely or log the incident, depending on your configuration.
 
@@ -79,7 +79,7 @@ While this plugin provides powerful spam detection capabilities, it should not b
 
 3. **Cost Management**:
    - Configure path and body regex patterns carefully to only analyze relevant requests
-   - Use *local (coming soon)* or the lightest model appropriate for your needs (e.g., gpt-4o-mini or gemini-2.0-flash vs gpt-4o)
+  - Use *local* or the lightest model appropriate for your needs (e.g., gpt-4o-mini or gemini-2.0-flash vs gpt-4o)
    - Consider implementing a quota system at the application level
 
 Without these additional protections, automated threats could rapidly exhaust your API quotas or generate unexpected costs through repeated requests.
