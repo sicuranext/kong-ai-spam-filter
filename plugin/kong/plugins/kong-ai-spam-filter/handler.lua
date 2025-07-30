@@ -26,8 +26,8 @@ local response_body_replace = function(plugin_conf, result)
   if plugin_conf.custom_response_body and plugin_conf.custom_response_body ~= "" then
     -- replace %{result.category} string
     response_body = plugin_conf.custom_response_body:gsub("%%{result%.category}", result.category or "unknown")
-    -- replace %{result.reason} string
-    response_body = response_body:gsub("%%{result%.reason}", result.reason or "no reason provided")
+    -- replace %{result.reason} string but first remove any characters outside the range [a-zA-Z0-9,.:;!? _-]
+    response_body = response_body:gsub("%%{result%.reason}", (result.reason or "no reason provided"):gsub("[^a-zA-Z0-9,.:;!? _-]", ""))
     -- replace %{plugin_conf.model} string
     response_body = response_body:gsub("%%{plugin_conf%.model}", model)
 
