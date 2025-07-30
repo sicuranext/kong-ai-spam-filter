@@ -147,8 +147,6 @@ _M.gemini = function(plugin_conf, user_prompt)
 
     -- remove multiple spaces
     response_text = response_text:gsub("%s+", " ")
-
-    print("Response text: ", response_text)
   else
     return nil, "Unexpected response structure"
   end
@@ -246,8 +244,6 @@ _M.gpt = function(plugin_conf, user_prompt)
 
     -- remove multiple spaces
     response_text = response_text:gsub("%s+", " ")
-
-    print("Response text: ", response_text)
   else
     return nil, "Unexpected response structure"
   end
@@ -354,7 +350,6 @@ _M.claude = function(plugin_conf, user_prompt)
     return nil, "Failed to parse LLM response as JSON: " .. (result or "unknown error")
   end
 
-  print("Result: ", tostring(result))
   return result
 end
 
