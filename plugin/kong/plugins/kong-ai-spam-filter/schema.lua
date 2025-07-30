@@ -95,7 +95,7 @@ local default_response_body = [[{
 
 local custom_response_header_description = [[
   Custom headers to include in the response.
-  Format: <header_name>:<header_value>
+  Format: header_name: header_value
 ]]
 
 local schema = {
