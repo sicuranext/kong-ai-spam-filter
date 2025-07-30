@@ -93,6 +93,11 @@ local default_response_body = [[{
   "model": "%{plugin_conf.model}"
 }]]
 
+local custom_response_header_description = [[
+  Custom headers to include in the response.
+  Format: <header_name>:<header_value>
+]]
+
 local schema = {
   name = plugin_name,
   fields = {
@@ -133,6 +138,7 @@ local schema = {
           { custom_response_body = { type = "string", default = default_response_body, description = custom_response_body_description } },
           { custom_response_content_type = { type = "string", default = "application/json", description = custom_response_content_type_description } },
           { custom_response_cache_control = { type = "string", default = "max-age=0, private, no-store, no-cache, must-revalidate", description = custom_response_cache_control_description } },
+          { custom_response_header = { type = "string", default = "", description = custom_response_header_description } },
           { debug = { type = "boolean", default = false, description = debug_description } },
         },
         entity_checks = {

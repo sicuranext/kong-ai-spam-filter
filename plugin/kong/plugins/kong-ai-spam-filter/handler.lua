@@ -81,14 +81,26 @@ function plugin:access(plugin_conf)
       local response_content_type = plugin_conf.custom_response_content_type or "application/json"
       local response_cache_control = plugin_conf.custom_response_cache_control or "max-age=0, private, no-store, no-cache, must-revalidate"
 
+      local response_headers = {
+        ["Content-Type"] = response_content_type,
+        ["Cache-Control"] = response_cache_control
+      }
+
+      if plugin_conf.custom_response_header and plugin_conf.custom_response_header ~= "" then
+        -- parse custom reponse header like [^:]+:<value>
+        local header_parts = plugin_conf.custom_response_header:match("^([^:]+):(.+)")
+        if header_parts then
+          local header_name = header_parts[1]
+          local header_value = header_parts[2]
+          response_headers[header_name] = response_body_replace(plugin_conf, header_value)
+        end
+      end
+
       if plugin_conf.action == "block-if-spam-or-error" or plugin_conf.action == "block-if-spam-only" then
         return kong.response.exit(
           response_code,
           response_body,
-          {
-            ["Content-Type"] = response_content_type,
-            ["Cache-Control"] = response_cache_control
-          }
+          response_headers
         )
       end
     end
