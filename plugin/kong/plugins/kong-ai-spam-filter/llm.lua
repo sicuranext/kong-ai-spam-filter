@@ -440,14 +440,13 @@ end
 ---@return table result Result from the LLM indicating if the request is spam
 ---@return string|nil error Error message if request failed
 _M.is_spam = function(plugin_conf)
-  local request_body = kong.request.get_raw_body()
-
   -- Only proceed if path matched
   if not utils.path_match(plugin_conf, kong.request.get_path()) then
     return { is_spam = false }
   end
 
   -- Only proceed if body matched
+  local request_body = kong.request.get_raw_body()
   if not utils.body_match(plugin_conf, request_body) then
     return { is_spam = false }
   end
