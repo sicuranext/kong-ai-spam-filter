@@ -90,8 +90,8 @@ function plugin:access(plugin_conf)
         -- parse custom reponse header like [^:]+:<value>
         local header_parts = plugin_conf.custom_response_header:match("^([^:]+):(.+)")
         if header_parts then
-          local header_name = header_parts[1]
-          local header_value = header_parts[2]
+          local header_name = header_parts[1]:gsub("^%s*(.-)%s*$", "%1")
+          local header_value = header_parts[2]:gsub("^%s*(.-)%s*$", "%1")
           response_headers[header_name] = response_body_replace(plugin_conf, header_value)
         end
       end
